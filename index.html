@@ -17,10 +17,30 @@
 
   <div class="schedule">
     <h4 class="title">Current Train Schedule</h4>
+    <table class="schedule-table">
+      <tr>
+        <th>Train Name</th>
+        <th>Destination</th>
+        <th>Frequency</th>
+        <th>Next Arrival</th>
+        <th>Minutes Away</th>
+      </tr>
+    </table>
   </div>
 
   <div class="add-train">
     <h4 class="title">Add A Train</h4>
+    <form action="submit">
+      <label for="train-name">Train Name</label>
+      <input type="text" id="train-name">
+      <label for="train-destination">Train Destination</label>
+      <input type="text" id="train-destination">
+      <label for="train-time">First Train Time (HH:MM Military Time)</label>
+      <input type="text" id="train-time">
+      <label for="train-frequency">Train Frequency (Minutes)</label>
+      <input type="text" id="train-frequency">
+      <button id="add-train" type="submit">Add Train</button>
+    </form>
   </div>
 
 
