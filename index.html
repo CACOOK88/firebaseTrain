@@ -9,40 +9,40 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+  <div class="container">
+    <div class="header-container">
+      <h1 class="header">HERE COMES THE TRAIN!!!!</h1>
+      <h3 class="sub-header">Driving the train doesn’t set its course. The real job is laying the track.</h3>
+    </div>
 
-  <div class="header-container">
-    <h1 class="header">HERE COMES THE TRAIN!!!!</h1>
-    <h3 class="sub-header"></h3>
+    <div class="schedule">
+      <h4 class="title">Current Train Schedule</h4>
+      <table class="schedule-table">
+        <tr>
+          <th>Train Name</th>
+          <th>Destination</th>
+          <th>Frequency</th>
+          <th>Next Arrival</th>
+          <th>Minutes Away</th>
+        </tr>
+      </table>
+    </div>
+
+    <div class="add-train">
+      <h4 class="title">Add A Train</h4>
+      <form action="submit">
+        <label for="train-name">Train Name</label>
+        <input type="text" id="train-name">
+        <label for="train-destination">Train Destination</label>
+        <input type="text" id="train-destination">
+        <label for="train-time">First Train Time (HH:MM Military Time)</label>
+        <input type="text" id="train-time">
+        <label for="train-frequency">Train Frequency (Minutes)</label>
+        <input type="text" id="train-frequency">
+        <button id="add-train" type="submit">Add Train</button>
+      </form>
+    </div>
   </div>
-
-  <div class="schedule">
-    <h4 class="title">Current Train Schedule</h4>
-    <table class="schedule-table">
-      <tr>
-        <th>Train Name</th>
-        <th>Destination</th>
-        <th>Frequency</th>
-        <th>Next Arrival</th>
-        <th>Minutes Away</th>
-      </tr>
-    </table>
-  </div>
-
-  <div class="add-train">
-    <h4 class="title">Add A Train</h4>
-    <form action="submit">
-      <label for="train-name">Train Name</label>
-      <input type="text" id="train-name">
-      <label for="train-destination">Train Destination</label>
-      <input type="text" id="train-destination">
-      <label for="train-time">First Train Time (HH:MM Military Time)</label>
-      <input type="text" id="train-time">
-      <label for="train-frequency">Train Frequency (Minutes)</label>
-      <input type="text" id="train-frequency">
-      <button id="add-train" type="submit">Add Train</button>
-    </form>
-  </div>
-
 
   <script src="assets/javascript/app.js"></script>
 </body>
