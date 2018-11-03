@@ -7,6 +7,9 @@
   <title>Train Schedules</title>
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
 </head>
 <body>
   <div class="container">
@@ -32,13 +35,13 @@
       <h4 class="title">Add A Train</h4>
       <form action="submit">
         <label for="train-name">Train Name</label>
-        <input type="text" id="train-name">
+        <input type="text" id="train-name" required>
         <label for="train-destination">Train Destination</label>
-        <input type="text" id="train-destination">
+        <input type="text" id="train-destination" required>
         <label for="train-time">First Train Time (HH:MM Military Time)</label>
-        <input type="text" id="train-time">
+        <input type="text" id="train-time" required>
         <label for="train-frequency">Train Frequency (Minutes)</label>
-        <input type="text" id="train-frequency">
+        <input type="text" id="train-frequency" required>
         <button id="add-train" type="submit">Add Train</button>
       </form>
     </div>
