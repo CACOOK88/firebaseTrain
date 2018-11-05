@@ -9,44 +9,76 @@ var config = {
 };
 firebase.initializeApp(config);
 
-// database reference variable
+// Database reference variable
 var database = firebase.database();
 
+// Initiating train information variables
+var train = '';
+var destination = '';
+var time = '';
+var freqency = '';
+
 //  ON VALUE FUNCTION
-database.ref().on('value', function(snapshot) {
-  if(snapshot.child('').exists()) {
+database.ref().on('child_added', function(snapshot) {
+  var sv = snapshot.val()
+  // set variable to current time minus 24 hours
+  // 24 hours ago ensures positive numbers in 
+  // following calculation variables
+  var startTime = moment(sv.time, 'hh:mm').subtract(24, 'hours');
+  // set variable to difference between now and startTime
+  var diffTime = moment().diff(moment(startTime), 'minutes');
+  // divide frequency into diffTime to get remainder
+  var timeRemainder = diffTime % sv.frequency;
+  // take remainder away from the frequency to calculate
+  // minutes until next train
+  var minutesUntil = sv.frequency - timeRemainder;
+  // add minutesUntil to current time to get next train time
+  var nextTrain = moment().add(minutesUntil, 'minutes').format('h:mm a');
 
-  }
+  // console.log(startTime);
+  // console.log(diffTime);
+  // console.log(timeRemainder);
+  // console.log(minutesUntil);
+  // console.log(nextTrain);
+
+  // create new row HTML
+  var newRow = $('<tr>');
+  // create new columns with database and calculated variables
+  var columns = $(
+    '<td>' + sv.trainName + '</td>' +
+    '<td>' + sv.destination + '</td>' +
+    '<td>' + sv.frequency + '</td>' +
+    '<td>' + nextTrain + '</td>' +
+    '<td>' + minutesUntil + '</td>'  
+  )
+  // append columns to row
+  newRow.append(columns);
+  // append new row to tbody section of html
+  $('tbody').append(newRow);
 })
-// check if any trains exist
-// calculate time remaining
-// print trains to screen
-// remember error object
-// update jquery with trains
-
 
 // CLICK ADD TRAIN BUTTON
 $('#add-train').on('click', function(event) {
   event.preventDefault();
+
   // grab the input values of the form
-  var train = $('#train-name').val().trim();
-  var destination = $('#train-destination').val().trim();
-  var time = $('#train-time').val().trim();
-  var freqency = $('#train-freqency').val().trim();
+  train = $('#train-name').val().trim();
+  destination = $('#train-destination').val().trim();
+  time = $('#train-time').val().trim();
+  freqency = $('#train-frequency').val().trim();
 
-
-  // ***********************************
-  // THIS WILL NOT WORK!
-  database.ref().set({
+  // push all variables to the database
+  database.ref().push({
     trainName: train,
     destination: destination,
     frequency: freqency,
-    time: time
+    time: time,
+    dateAdded: firebase.database.ServerValue.TIMESTAMP
   })
-})
-// grab train input values
-// check if train name exists
 
-  // if not calculate time
-  // if not add to database
-  // if so, alert duplicate
+  // clear input boxes
+  $('#train-name').val('');
+  $('#train-destination').val('');
+  $('#train-time').val('');
+  $('#train-frequency').val('');
+})
